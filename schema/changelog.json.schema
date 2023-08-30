@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "changelog schema",
+  "type": "object",
+  "properties": {
+    "releases": {
+      "type": "object",
+      "minProperties": 0,
+      "patternProperties": {
+        "^.+$": {
+          "type": "object",
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "private": { "type": "string" }
+              },
+              "required": [ "private" ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "public": { "type": "string" }
+              },
+              "required": [ "public" ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
+    },
+    "changes": {
+      "type": "object",
+      "minProperties": 0,
+      "patternProperties": {
+        "^.+$": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "object",
+            "patternProperties": {
+              "^.+$": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "change types": {
+      "type": "object",
+      "properties": {
+        "major": { "type": "array", "minItems": 0, "items": { "type": "string" } },
+        "minor": { "type": "array", "minItems": 0, "items": { "type": "string" } },
+        "patch": { "type": "array", "minItems": 0, "items": { "type": "string" } },
+        "internal": { "type": "array", "minItems": 0, "items": { "type": "string" } }
+      },
+      "required": [ "major", "minor", "patch", "internal" ],
+      "additionalProperties": false
+    },
+    "utc offset hours": {
+      "type": "integer",
+      "minimum": -12,
+      "maximum": 12
+    },
+    "datetime format": {
+      "type": "string"
+    }
+  },
+  "required": [ "changes", "change types", "utc offset hours", "datetime format" ],
+  "additionalProperties": false
+}
