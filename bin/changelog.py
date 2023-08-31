@@ -245,7 +245,7 @@ class ChangeLog:
                 ChangeClass.PATCH.value: [
                     'bug fix',
                     'performance improvement',
-                    '!!!forced minor update',
+                    '!!!forced patch update',
                 ],
                 ChangeClass.INTERNAL.value: [
                     'refactoring',
