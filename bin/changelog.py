@@ -262,7 +262,7 @@ class ChangeLog:
             raise ChangeLogAlreadyExistsError('{} already exists.'.format(changelog_file_path))
         else:
             changelog_data = klass.generate_initial_changelog_data(utc_offset_hours)
-            with open(changelog_file_path, mode='wt') as fd:
+            with open(changelog_file_path, mode='wt', encoding='utf-8') as fd:
                 json.dump(changelog_data, fd, indent=2)
 
     def print_changelog(self):
@@ -321,7 +321,7 @@ if __name__ == '__main__':
         if args.command == CMD_INIT:
             ChangeLog.initialize_changelog(args.file, args.utc_time_offset)
         else:
-            with open(args.file, mode='rt') as fd:
+            with open(args.file, mode='rt', encoding='utf-8') as fd:
                 changelog_string = fd.read()
             changelog = ChangeLog.parse_changelog(changelog_string)
             if args.command == CMD_CALC:
